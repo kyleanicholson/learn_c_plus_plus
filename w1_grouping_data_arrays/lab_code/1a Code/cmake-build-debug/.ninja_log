@@ -1,0 +1,14 @@
+# ninja log v5
+0	2110	7022565640000000	CMakeFiles/lab_code.dir/main.cpp.obj	eb89cfe9fbad0e70
+3	1997	7022566840000000	CMakeFiles/lab_code.dir/lab1_kan.cpp.obj	268d0071952da577
+2003	3552	7022566860000000	lab_code.exe	f711a574e149e729
+2	1860	7022797860000000	CMakeFiles/lab_code.dir/main.cpp.obj	eb89cfe9fbad0e70
+276	2128	7022797860000000	CMakeFiles/lab_code.dir/lab1_kan.cpp.obj	268d0071952da577
+2128	3578	7022797880000000	lab_code.exe	f711a574e149e729
+3	1764	7022823840000000	CMakeFiles/lab_code.dir/main.cpp.obj	eb89cfe9fbad0e70
+1769	3057	7022823840000000	lab_code.exe	f711a574e149e729
+3	1733	7022826200000000	CMakeFiles/lab_code.dir/main.cpp.obj	eb89cfe9fbad0e70
+1738	3174	7022826220000000	lab_code.exe	f711a574e149e729
+280	3338	7022831300000000	CMakeFiles/lab_code.dir/main.cpp.obj	eb89cfe9fbad0e70
+4	3357	7022831300000000	CMakeFiles/lab_code.dir/lab1_kan.cpp.obj	268d0071952da577
+3358	5372	7022831320000000	lab_code.exe	f711a574e149e729

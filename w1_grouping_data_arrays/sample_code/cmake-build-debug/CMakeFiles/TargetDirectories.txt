@@ -1,0 +1,3 @@
+D:/crucial_programming/CS162C/W1/sample_code/cmake-build-debug/CMakeFiles/sample_code.dir
+D:/crucial_programming/CS162C/W1/sample_code/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/crucial_programming/CS162C/W1/sample_code/cmake-build-debug/CMakeFiles/rebuild_cache.dir
