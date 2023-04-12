@@ -363,4 +363,223 @@ _Time complexity: The time complexity of insertion sort is O(n<sup>2</sup>), whe
 
 ## Parallel Arrays
 
+Parallel arrays are two or more arrays of the same length that contain related data, where the corresponding elements in each array are associated with each other. In other words, each array in a set of parallel arrays contains a different aspect of a data set, and the data in each array are related to the same position in the other arrays.
+
+For example, consider a set of parallel arrays that store information about students. One array might store the names of the students, another array might store their student IDs, and a third array might store their grades on an exam. Each element in the arrays corresponds to a single student, so the first element in each array corresponds to the first student, the second element corresponds to the second student, and so on.
+
+Using parallel arrays can make it easier to work with related data because you can access and manipulate the data in each array independently. However, it also requires careful management to ensure that the corresponding elements in each array remain synchronized.
+
+### Defining Parallel Arrays
+
+```c++
+// Initialize Arrays Students and grades (two arrays)
+const int SIZE = 7;
+string names[SIZE];
+int grades[SIZE];
+
+int count = 0;
+const string FLAG = "DONE";
+string name;
+do {
+ cout << "Enter a student name, done to end: ";
+ cin >> name;
+ if (name != FLAG)
+ {
+ names[count] = name;
+ cout << "Enter the grade for " << name << ": ";
+ cin >> grades[count];
+ count += 1;
+ }
+} while (name != FLAG && count < SIZE);
+
+```
+
+### Using Parallel Arrays
+
+```c++
+cout << "What name do you want? ";
+cin >> name;
+bool found = false;
+for (int i = 0; i < SIZE && !found; i++)
+{
+ if ( names[i] == name )
+ {
+ cout << name << " has a grade of " << grades[i] << endl;
+ found = true;
+ }
+}
+if (!found)
+{
+ cout << "There was no student with that name, sorry." << endl;
+}
+
+```
+
+### Sorting Parallel Arrays
+
+```c++
+#include <iostream>
+#include <string>
+using namespace std;
+
+// parallel arrays to be sorted
+int arr1[] = {5, 3, 1, 4, 2};
+string arr2[] = {"apple", "banana", "orange", "peach", "grape"};
+
+int main() {
+    // length of arrays
+    int n = sizeof(arr1) / sizeof(arr1[0]);
+
+    // selection sort algorithm
+    for (int i = 0; i < n-1; i++) {
+        // find the minimum element in the remaining unsorted part of arr1
+        int min_idx = i;
+        for (int j = i+1; j < n; j++) {
+            if (arr1[j] < arr1[min_idx]) {
+                min_idx = j;
+            }
+        }
+
+        // swap the minimum element in arr1 with the current element
+        int temp1 = arr1[i];
+        arr1[i] = arr1[min_idx];
+        arr1[min_idx] = temp1;
+
+        // swap the corresponding element in arr2
+        string temp2 = arr2[i];
+        arr2[i] = arr2[min_idx];
+        arr2[min_idx] = temp2;
+    }
+
+    // print the sorted parallel arrays
+    for (int i = 0; i < n; i++) {
+        cout << arr1[i] << " " << arr2[i] << endl;
+    }
+    return 0;
+}
+
+```
+
 ## Exceptions
+
+One problem when programming is how to handle exceptions – that is situations where something
+goes wrong or a function or method is not able to return a valid value
+
+### Justification
+
+```c++
+// getValue returns the contents of an array at a given location
+// if the program is attempting to access past the end of the array
+// an error occurs
+int getValue(int const theArray[], int size, int index)
+{
+  if (index >= size)
+  {
+    cout << "Past the end" << endl;
+    return -1;
+  }
+  return theArray[index];
+}
+int main()
+{
+  const int SIZE = 10;
+  int value;
+  int theArray[SIZE] = {1, 3, 5, 7, 9, 11, 13, 15, 17};
+  for (int i = 0; i < SIZE; i++)
+  {
+    cout << theArray[i] << " ";
+  }
+  cout << endl;
+
+  if ((value = getValue(theArray, SIZE, 10)) == -1)
+  {
+    cout << "Error occurred" << endl;
+  }
+  else
+  {
+    cout << "That location contains " << value << endl;
+  }
+
+  return 0;
+}
+```
+
+If an error occurs, the getValue function will return a -1. Unfortunately, since this is an integer
+array, that is a possible legal value. So, the calling program might report an error when there
+actually was none. Other than defining some more complicated return type that can contain both a return status and a
+value, there is no good solution other than throwing an exception.
+
+### Throwing an Exception
+
+Throwing an exception means that the function does not return in the normal manner. Instead, the
+runtime environment terminates the function and works its way up the call stack checking each
+calling method in turn until it finds one that has set up an exception handler. If it reaches main
+without finding an exception handler, main is terminated and the runtime program that calls main
+will deal with the exception – not normally desirable.
+
+### Catching an Exception
+
+Example
+
+```c++
+#include <iostream>
+#include <stdexcept>
+using std::cout, std::endl, std::out_of_range, std::exception;
+// getValue returns the contents of an array at a given location
+// checking for accessing past the end of the array
+int getValue(int const theArray[], int size, int index)
+{
+  if (index >= size)
+  {
+    throw out_of_range("Index past end of array");
+  }
+  return theArray[index];
+}
+int main()
+{
+  const int SIZE = 10;
+  int value, theArray[SIZE] = {1, 3, 5, 7, 9, 11, 13, 15, 17};
+  for (int i = 0; i < SIZE; i++)
+  {
+    cout << theArray[i] << " ";
+  }
+  cout << endl;
+
+  // this try block calls the function to see if an exception occurs
+  // if not, it outputs the value in the array at that location
+  try
+  {
+    value = getValue(theArray, SIZE, 10);
+
+    cout << "The value is " << value << endl;
+  }
+  // this catch will catch any standard exception
+  // and display the string that was part of its throw
+  catch (exception &ex)
+  {
+    cout << "Caught exception with message: " << ex.what() << endl;
+  }
+  // once the try/catch is done, execution continues here
+  cout << "After the catch" << endl;
+
+  return 0;
+}
+```
+
+When getValue is executed, if the index is past the end of the array, it throws an exception. In this
+case, it was the exception std::out_of_range. This is an object of the class exception that requires a
+string literal as an argument explaining why the exception what thrown. This message is displayed
+by calling what() on the object. Notice that the parameter to catch is a reference of the type of
+exception being looked for.
+
+The try block simply executes the code inside the { }. If an exception is thrown by something inside
+that block, then any catch methods are checked in turn. A catch is like any other overloaded
+function in that the argument type determines which catch is used. For example, the following
+try/catch block will check in turn for a standard exception and then anything.
+
+Only one of the catch blocks will actually be executed. If none of them match the type of the
+thrown object or there is no default catch ( ... ), then this program will terminate and
+whoever called it will have to deal with the exception.
+
+Once the exception has been handled, and assuming that the program is not terminated
+with an exit or return, execution continues with the first line of code after the last catch.
