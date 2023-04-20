@@ -9,10 +9,10 @@ const int MAX_SIZE = 10;
 // Function prototypes
 void createDungeon(char dungeon[][MAX_SIZE], int traps, int treasures, int player_loc[2]);
 void displayDungeon(char dungeon[][MAX_SIZE]);
-void getMove(int player[2], int newPlayer[2]);
-bool checkLose(int player[2], char dungeon[][MAX_SIZE]);
-bool checkWin(int player[2], char dungeon[][MAX_SIZE]);
-void updateDungeon(char dungeon[][10], int player[2], int newPlayer[2]);
+void getMove(int player_loc[2], int new_player_loc[2]);
+bool checkLose(int player_loc[2], char dungeon[][MAX_SIZE]);
+bool checkWin(int player_loc[2], char dungeon[][MAX_SIZE]);
+void updateDungeon(char dungeon[][10], int player_loc[2], int new_player_loc[2]);
 bool playAgain();
 
 

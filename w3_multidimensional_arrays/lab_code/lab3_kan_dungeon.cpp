@@ -1,10 +1,3 @@
-/*
-Lab No: 3
-Name: Kyle Nicholson
-Date: 4/18/2023
-Revision: 1.0
-Description: This program implements a simple dungeon game.
-*/
 
 
 #include "lab3_kan_dungeon.hpp"
@@ -24,16 +17,16 @@ void displayDungeon(char dungeon[][MAX_SIZE]) {
 
 }
 
-void getMove(int player[2], int newPlayer[2]) {
+void getMove(int player_loc[2], int new_player_loc[2]) {
 
-    // pass in the curent player location and empty new player location as 2-element arrays
+    // pass in the current player_loc location and empty new player_loc location as 2-element arrays
     // gets and validates a move (L, R, U, D)
     std::cout << "Getting a move" << std::endl;
 
-    // pass back new player location using parameter
+    // pass back new player_loc location using parameter
 }
 
-bool checkLose(int player[2], char dungeon[][MAX_SIZE]) {
+bool checkLose(int player_loc[2], char dungeon[][MAX_SIZE]) {
     // pass in the player location and the dungeon
     // check if the player has stepped on a trap
     // return true if the player has lost
@@ -41,7 +34,7 @@ bool checkLose(int player[2], char dungeon[][MAX_SIZE]) {
     return false;
 }
 
-bool checkWin(int player[2], char dungeon[][MAX_SIZE]) {
+bool checkWin(int player_loc[2], char dungeon[][MAX_SIZE]) {
     // pass in the player location and the dungeon
     // check if the player has stepped on a treasure
     // return true if the player has won
@@ -49,7 +42,7 @@ bool checkWin(int player[2], char dungeon[][MAX_SIZE]) {
     return true;
 }
 
-void updateDungeon(char dungeon[][MAX_SIZE], int player[2], int newPlayer[2]) {
+void updateDungeon(char dungeon[][MAX_SIZE], int player_loc[2], int new_player_loc[2]) {
     // update dungeon for the next cycle
     // pass in the dungeon, previous player location, new player location
     std::cout << "Updating dungeon" << std::endl;
