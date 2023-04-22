@@ -65,8 +65,6 @@ void createDungeon(char dungeon[][MAX_SIZE], int traps, int treasures, int (&pla
             y = generateRandomInt(0, MAX_SIZE - 1);
         }
     } while (dungeon[x][y] != 'X');
- std::cout << "Dungeon created successfully!" << std::endl;
- std::cout << "The player is located at: " << player_loc[0] << ", " << player_loc[1] << std::endl;
 }
 
 void displayDungeon(char dungeon[][MAX_SIZE]) {
@@ -83,12 +81,15 @@ void getMove(const int player_loc[2], int (&new_player_loc)[2]) {
     char move;
     bool valid;
     // gets and validates a move (L, R, U, D)
-    std::cout << "Please choose a direction to move in" << std::endl;
+    std::cout << std::endl;
+    std::cout << "Choose a Direction..." << std::endl;
+    std::cout << "_______________________" << std::endl;
     std::cout << "L = Left" << std::endl;
     std::cout << "R = Right" << std::endl;
     std::cout << "U = Up" << std::endl;
     std::cout << "D = Down" << std::endl;
-    std::cout << "Enter your choice: ";
+    std::cout << "_______________________" << std::endl;
+    std::cout << "Choice: ";
     do {
         std::cin >> move;
         std::cin.ignore(100, '\n');
@@ -146,17 +147,16 @@ void getMove(const int player_loc[2], int (&new_player_loc)[2]) {
                 break;
         }
     } while (!valid);
+    std::cout << std::endl;
 }
 
 bool checkLose(const int player_loc[2], char dungeon[][MAX_SIZE]) {
     // check if the player has stepped on a trap
     if (dungeon[player_loc[0]][player_loc[1]] == '#') {
         std::cout << "Oh No! You stepped into a Trap!!!" << std::endl;
-        std::cout << GAME_OVER_TEXT << std::endl;
         return true;
     }
     // return true if the player has lost
-    std::cout << "Player has not lost" << std::endl;
     return false;
 }
 
@@ -164,11 +164,18 @@ bool checkWin(const int player_loc[2], char dungeon[][MAX_SIZE]) {
     // check if the player has stepped on the exit
     if (dungeon[player_loc[0]][player_loc[1]] == 'X') {
         std::cout << "Congratulations! You have found the exit!" << std::endl;
-        std::cout << WIN_TEXT << std::endl;
         return true; // Player has found the exit
     }
 
-    std::cout << "Player has not won..." << std::endl;
+    return false;
+}
+
+bool checkTreasure(const int player_loc[2], char dungeon[][MAX_SIZE]) {
+    // check if the player has stepped on a treasure
+    if (dungeon[player_loc[0]][player_loc[1]] == '$') {
+        std::cout << "You found a treasure!" << std::endl;
+        return true;
+    }
     return false;
 }
 
@@ -179,7 +186,6 @@ void updateDungeon(char dungeon[][MAX_SIZE], const int player_loc[2], const int 
     // Set the player's new location to the player symbol
     dungeon[new_player_loc[0]][new_player_loc[1]] = '@';
 
-    std::cout << "Dungeon updated successfully!" << std::endl;
 }
 
 bool yesNo(const std::string& prompt) {

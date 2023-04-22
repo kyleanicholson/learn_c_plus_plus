@@ -40,6 +40,30 @@ const std::string WIN_TEXT =
 /____/\____/\____/\____/_____//____/____(_)
 
 )";
+const std::string TREASURE_TEXT =
+        R"(
+                   _.--.
+            _.-'_:-'||
+        _.-'_.-::::'||
+   _.-:'_.-::::::'  ||
+ .'`-.-:::::::'     ||
+/.'`;|:::::::'      ||_
+||   ||::::::'     _.;._'-._
+||   ||:::::'  _.-!oo @.!-._'-.
+\'.  ||:::::.-!()oo @!()@.-'_.|
+'.'-;|:.-'.&$@.& ()$%-'o.'\U||
+  `>'-.!@%()@'@_%-'_.-o _.|'||
+   ||-._'-.@.-'_.-' _.-o  |'||
+   ||=[ '-._.-\U/.-'    o |'||
+   || '-.]=|| |'|      o  |'||
+   ||      || |'|        _| ';
+   ||      || |'|    _.-'_.-'
+   |'-._   || |'|_.-'_.-'
+    '-._'-.|| |' `_.-'
+        '-.||_/.-'
+
+)";
+
 
 
 
@@ -50,6 +74,7 @@ void displayDungeon(char dungeon[][MAX_SIZE]);
 void getMove(const int player_loc[2], int (&new_player_loc)[2]);
 bool checkLose(const int player_loc[2], char dungeon[][MAX_SIZE]);
 bool checkWin(const int player_loc[2], char dungeon[][MAX_SIZE]);
+bool checkTreasure(const int player_loc[2], char dungeon[][MAX_SIZE]);
 void updateDungeon(char dungeon[][MAX_SIZE], const int player_loc[2], const int new_player_loc[2]);
 bool yesNo(const std::string& prompt);
 bool playAgain();
