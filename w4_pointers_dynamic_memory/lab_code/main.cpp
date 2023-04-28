@@ -7,8 +7,6 @@ Description: This program implements a memory game using pointers and arrays.
 
 */
 #include "kan_lab4_memory.hpp"
-#include <iostream>
-#include <iomanip>
 
 
 int main() {
@@ -16,7 +14,7 @@ int main() {
     // For a hard game, the board will be 30 squares (5 x 6) and for an easy game it will be 16 (4 x 4).
     do {
         //Declare game variables
-        int move1, move2, rowLength, colLength, difficulty, tries = 0;
+        int rowLength, colLength, difficulty, tries = 0;
         char *board;
         bool done = false;
         //Ask user if they want to play a hard or easy game
@@ -32,21 +30,35 @@ int main() {
         }
         //Create board array and shuffle
         board = createBoard(difficulty);
-        //Display instructions
+        //Display game instructions
         displayInstructions();
         do {
+            int move1[2], move2[2];
             //Display board
             showBoard(board, rowLength, colLength);
+
+            //For each turn, display the current state of the board, showing an UNKNOWN or a SPACE at each
+            //location.
+            // Each location starts being shown as UNKNOWN. Once the value at a location has been
+            //discovered, a SPACE will be shown there.
+            //After showing the current state, get a move.
             //Get move 1
-            getMove(board, rowLength, colLength, &move1);
-            //Get move 2 and compare with move 1
-            getMove(board, rowLength, colLength, &move1, &move2);
-            //Check match
-            bool match = checkMatch(board, rowLength, colLength, &move1, &move2);
-            //Update board
-            updateBoard(board, rowLength, colLength, &move1, &move2);
-            //Show board
-            showBoard(board, rowLength, colLength, &move1, &move2);
+            getMove(board, rowLength, colLength, move1);
+            //Then redisplay the state, but at the move’s location,
+            //show the correct symbol instead of UNKNOWN.
+            showBoard(board, rowLength, colLength, move1);
+            //Then get a second move and display the board with
+            //each of the two locations showing the correct symbol instead of UNKNOWN. A move is stored as a
+            //two-element array containing the row and column of the move.
+            getMove(board, rowLength, colLength, move1, move2);
+            showBoard(board, rowLength, colLength, move1, move2);
+
+            bool match = checkMatch(board, rowLength, colLength, move1, move2);
+
+            // if there is a match update the board replacing the matched characters with SPACE at the two locations that were compared.
+            if (match) {
+                updateBoard(board, rowLength, colLength, move1, move2);
+            }
             //Check if done
             done = checkDone(board, rowLength, colLength);
             //If not done, increment tries and repeat
@@ -56,6 +68,7 @@ int main() {
 
         } while (!done);
         //Ask user if they want to play again
+        delete[] board;
     } while (yesNo("Would you like to play again?"));
     return 0;
 }
