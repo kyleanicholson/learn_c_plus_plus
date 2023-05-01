@@ -1,7 +1,7 @@
 /*
 Lab No: 4
 Name: Kyle Nicholson
-Date: 4/26/2023
+Date: 4/30/2023
 Revision: 1.0
 Description: This program implements a memory game using pointers and arrays.
 
@@ -32,26 +32,28 @@ int main() {
         board = createBoard(difficulty);
         //Display game instructions
         displayInstructions();
+
         do {
             int move1[2], move2[2];
             //Display board
             showBoard(board, rowLength, colLength);
 
-            //For each turn, display the current state of the board, showing an UNKNOWN or a SPACE at each
-            //location.
-            // Each location starts being shown as UNKNOWN. Once the value at a location has been
-            //discovered, a SPACE will be shown there.
-            //After showing the current state, get a move.
+            std::cout << std::endl;   // Insert blank line for readability
             //Get move 1
             getMove(board, rowLength, colLength, move1);
             //Then redisplay the state, but at the move’s location,
-            //show the correct symbol instead of UNKNOWN.
+
             showBoard(board, rowLength, colLength, move1);
-            //Then get a second move and display the board with
-            //each of the two locations showing the correct symbol instead of UNKNOWN. A move is stored as a
-            //two-element array containing the row and column of the move.
+
+            std::cout << std::endl;   // Insert blank line for readability
+
+            //Get move 2
             getMove(board, rowLength, colLength, move1, move2);
+
+            //Display the board with each of the two locations showing the correct symbol instead of UNKNOWN.
             showBoard(board, rowLength, colLength, move1, move2);
+
+            std::cout << std::endl; // Insert blank line for readability
 
             bool match = checkMatch(board, rowLength, colLength, move1, move2);
 
@@ -68,7 +70,9 @@ int main() {
 
         } while (!done);
         //Ask user if they want to play again
-        delete[] board;
+
+        std::cout << "You won in " << tries << " tries!" << std::endl;
+
     } while (yesNo("Would you like to play again?"));
     return 0;
 }
