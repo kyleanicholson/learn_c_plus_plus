@@ -5,6 +5,14 @@ Date: 5/3/2023
 Revision: 1.0
 Description: This program will create a dynamic array of students, sort the array by last name,
 and search for a students by last name.
+
+ Student data to use for testing
+L00765432: First Name: Samantha, Last Name: Lee, GPA: 3.7
+L00234567: First Name: Emily, Last Name: Johnson, GPA: 3.8
+L00987654: First Name: John, Last Name: Doe, GPA: 4.0
+L00543210: First Name: Michael, Last Name: Brown, GPA: 3.2
+L00111111: First Name: Jane, Last Name: Smith, GPA: 3.5
+L00999999: First Name: Robert, Last Name: Wilson, GPA: 3.9
 */
 #include "kan_lab5_functions.hpp"
 
@@ -14,9 +22,11 @@ int main() {
   Student* students = createArray(numStudents); // create dynamic array of students
 
   // display the array (sorted by Lnumber by default)
+  std::cout << "Students sorted by Lnumber:" << std::endl;
   displayArrays(students, numStudents);
 
   // sort the array by last name using std::sort
+  std::cout << "Students sorted by last name:" << std::endl;
   std::sort(students, students + numStudents, compareLastName);
 
   // display the sorted array
@@ -35,7 +45,6 @@ int main() {
 
   // free dynamically allocated memory
   delete[] students;
-
 
   return 0;
 }

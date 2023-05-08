@@ -4,12 +4,14 @@
 
 #include <string>
 #include <iostream>
+#include <iomanip>
 #include <algorithm>
+#include <fstream>
 
 struct Student{
     std::string first_name;
     std::string last_name;
-    std::string lnumber;
+    std::string l_number;
     float gpa;
 };
 
