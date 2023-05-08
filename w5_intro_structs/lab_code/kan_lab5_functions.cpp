@@ -1,6 +1,7 @@
 
 
 #include "kan_lab5_functions.hpp"
+
 // Function to call when sorting by Lnumber
 bool compareLastName(const Student &a, const Student &b) {
   // Compares last names of two students
@@ -11,8 +12,8 @@ bool compareLastName(const Student &a, const Student &b) {
 }
 
 // Helper Functions
-void insertArray(Student* students, Student newStudent, int& count, int size) {
-
+void insertArray(Student *students, Student newStudent, int &count, int size) {
+  // Insert a new student into the array at the correct index
   if (count >= size) {
     // throw an exception
     throw std::out_of_range("Array is full");
@@ -25,8 +26,6 @@ void insertArray(Student* students, Student newStudent, int& count, int size) {
   // insert the new value at the correct index
   students[index] = newStudent;
   count++;
-
-  std::cout << "Student data inserted into array at index " << index << std::endl;
 }
 
 // Main Functions
@@ -80,7 +79,7 @@ std::string getLnumber() {
   bool valid = false;
   // Input validation
   do {
-    std::cout << "Please enter an Lnumber (L00xxxxxx): ";
+    std::cout << "Lnumber: ";
     std::cin >> lNumber;
     std::cin.ignore(100, '\n');
     // check if valid Lnumber
@@ -91,10 +90,9 @@ std::string getLnumber() {
         std::cin.clear();
         std::cin.ignore(100, '\n');
       } else if (lNumber.length() != 9 || lNumber[0] != 'L' || lNumber[1] != '0' || lNumber[2] != '0') {
-        std::cout << "Please enter a valid Lnumber (L00xxxxxx): ";
+        std::cout << "Invalid input, format must be L00XXXXXXX" << std::endl;
       }
-    }
-    else {
+    } else {
       valid = true;
     }
   } while (!valid);
@@ -103,7 +101,7 @@ std::string getLnumber() {
 }
 
 float getGPA() {
-  // Get GPA from the user between 0.0 and 4.0
+  // Get GPA from the user between 2.0 and 4.2
   float gpa;
   bool valid = false;
   do {
@@ -111,17 +109,16 @@ float getGPA() {
     std::cin >> gpa;
     std::cin.ignore(100, '\n');
     // check if valid GPA
-    if (std::cin.fail() || gpa < 0.0 || gpa > 4.0) {
+    if (std::cin.fail() || gpa < 2.0 || gpa > 4.2) {
       if (std::cin.fail()) {
         std::cout << "Invalid input, please try again" << std::endl;
         // clear error flags and flush input buffer
         std::cin.clear();
         std::cin.ignore(100, '\n');
-      } else if (gpa < 0.0 || gpa > 4.0) {
+      } else if (gpa < 2.0 || gpa > 4.2) {
         std::cout << "Please enter a valid GPA (0.0 to 4.0): ";
       }
-    }
-    else {
+    } else {
       valid = true;
     }
   } while (!valid);
@@ -154,10 +151,13 @@ Student *createArray(int numStudents) {
 void displayArrays(const Student *students, int count) {
 
   // display the arrays in columns `firstName`, `lastName`, `Lnumber`, and `GPA`
-  std::cout << std::setw(10) << "First Name" << std::setw(10) << "Last Name" << std::setw(10) << "Lnumber" << std::setw(5) << "GPA" << std::endl;
+  std::cout << std::left << std::setw(12) << "First Name" << std::setw(12) << "Last Name" << std::setw(12) << "Lnumber"
+            << std::setw(5) << "GPA" << std::endl;
 
   for (int i = 0; i < count; i++) {
-    std::cout << std::setw(10) << students[i].first_name << std::setw(10) << students[i].last_name << std::setw(10) << students[i].l_number << std::setw(5) << students[i].gpa << std::endl;
+    std::cout << std::left << std::setw(12) << students[i].first_name << std::setw(12) << students[i].last_name
+              << std::setw(12) << students[i].l_number << std::setw(5) << std::setprecision(2) << std::fixed
+              << students[i].gpa << std::endl;
   }
 }
 
@@ -177,7 +177,7 @@ bool binSearch(Student *arr, int count, std::string value) {
       min = mid + 1;
     }
   }
-  std::cout << "Searching for last name "<< value<<  std::endl;
+  std::cout << "Searching for last name " << value << std::endl;
   return found;
 
 }

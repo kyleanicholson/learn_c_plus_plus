@@ -17,16 +17,20 @@ L00999999: First Name: Robert, Last Name: Wilson, GPA: 3.9
 #include "kan_lab5_functions.hpp"
 
 int main() {
-  std::cout << "Please enter the number of students:" << std::endl;
+  std::cout << "Number of students:";
   int numStudents = getInteger(1, 100); // get number of students to enter
   Student* students = createArray(numStudents); // create dynamic array of students
 
   // display the array (sorted by Lnumber by default)
+  std::cout << std::endl;
   std::cout << "Students sorted by Lnumber:" << std::endl;
+  std::cout << std::endl;
   displayArrays(students, numStudents);
 
   // sort the array by last name using std::sort
+  std::cout << std::endl;
   std::cout << "Students sorted by last name:" << std::endl;
+  std::cout << std::endl;
   std::sort(students, students + numStudents, compareLastName);
 
   // display the sorted array
