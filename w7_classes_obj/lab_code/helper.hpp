@@ -7,13 +7,16 @@
 
 #include "Student.hpp"
 #include <iostream>
+#include <iomanip>
 
 
 int getInteger(int min, int max);
 
+std::string getString(std::string prompt);
+
 Student *createStudent();
 
-void displayStudents(Student *students, int numStudents);
+void displayStudents(const Student *students, int numStudents);
 
 
 #endif //LAB_CODE_HELPER_HPP

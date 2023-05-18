@@ -1,35 +1,69 @@
-//
-// Your helper source file (helper.cpp) should consist of stubs for the helper functions along with comments
-// (pseudocode style) that describe what that function will do.
-// Remember that all functions need proper return types and parameters as described in the
-// Lab 7 document and to compile and run with your main.
-//
-
 
 #include "helper.hpp"
 
 int getInteger(int min, int max) {
-  //used to get an input value
-  //input parameters are min and max value
-  //get and validates an integer between min and max
-  //return the value
-  std::cout << "Getting integer" << std::endl;
-  return 1;
+    // Get a number between min and max from the user
+    int num;
+    bool valid;
+    do {
+        std::cin >> num;
+        std::cin.ignore(100, '\n');
+        // set the input flag
+        valid = true;
+        // check if valid integer between min and max
+        if (std::cin.fail() || num < min || num > max) {
+            if (std::cin.fail()) {
+                std::cout << "Invalid input, please try again" << std::endl;
+                // clear error flags and flush input buffer
+                std::cin.clear();
+                std::cin.ignore(100, '\n');
+            } else if (num < min || num > max) {
+                std::cout << "Please choose a different number (must choose between " << min << " and " << max << ") ";
+            }
+            valid = false;
+        }
+    } while (!valid);
+    return num;
+}
+
+std::string getString(std::string prompt) {
+    // Get a string from the user
+    std::string str;
+    while (true) {
+        std::cout << prompt;
+        std::getline(std::cin, str);
+        if (!std::cin.fail()) {
+            break;
+        }
+        std::cin.clear();
+        std::cin.ignore(100, '\n');
+        std::cout << "Invalid input. Please try again." << std::endl;
+    }
+    return str;
 }
 
 Student *createStudent() {
-  // used to create a new student
-  // get name and age, age validated as being positive integer
-  // use name and age to dynamically create a student
-  // When entering a student, any string is legal, and ages should be between 10 and 90.
-  // return a pointer to the student
-  std::cout << "Creating Student" << std::endl;
-  return nullptr;
-}
+    // create a new student
+    std::string name;
+    int age;
+    // get name and age, age validated as being positive integer
+    name = getString("Please enter the student's name: ");
+    std::cout << "Please enter the student's age: ";
+    age = getInteger(10, 90);
+    // use name and age to dynamically create a student
+    Student *student = new Student(name, age);
+    // return a pointer to the student
+    return student;
 
-void displayStudents(Student *students, int numStudents) {
-  // used to display array of students
-  // array should be passed safely
-  // no return values
+};
+
+void displayStudents(const Student *students, int numStudents) {
+    // Display the array of students with columns for name and age
+    std::cout << std::left << std::setw(25) << "Name"
+              << std::setw(5) << "Age" << std::endl;
+    for (int i = 0; i < numStudents; i++) {
+        std::cout << std::left << std::setw(20) << students[i].getName() << std::setw(5) << students[i].getAge()
+                  << std::endl;
+    }
 }
 

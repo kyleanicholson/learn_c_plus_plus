@@ -12,24 +12,25 @@ Student::Student() : name(""), age(0) {
 Student::Student(const std::string &studentName, int studentAge) : name(studentName), age(studentAge) {
 }
 
+// Destructor
 Student::~Student() {
-  // Destructor
 }
 
+// Setters and Getters
 void Student::setAge(int studentAge) {
-  age = studentAge;
+    age = studentAge;
 }
 
 int Student::getAge() const {
-  return age;
+    return age;
 }
 
 std::string Student::getName() const {
-  return name;
+    return name;
 }
 
 void Student::setName(const std::string &studentName) {
-  name = studentName;
+    name = studentName;
 }
 
 
