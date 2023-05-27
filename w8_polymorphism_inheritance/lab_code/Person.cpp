@@ -1,5 +1,2 @@
-//
-// Created by kanicholson on 5/25/2023.
-//
-
+// This file is intentionally blank per instructions
 #include "Person.hpp"

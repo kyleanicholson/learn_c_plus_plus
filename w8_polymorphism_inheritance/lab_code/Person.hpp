@@ -1,5 +1,3 @@
-// Person class implementation
-
 
 #ifndef LAB_CODE_PERSON_HPP
 #define LAB_CODE_PERSON_HPP
@@ -20,7 +18,7 @@ public:
     Person(const std::string &firstName, const std::string &lastName, int age)
             : firstName(firstName), lastName(lastName), age(age) {}
 
-    // Destructor
+    // Destructor (does nothing)
     ~Person() {}
 
     // Getters
