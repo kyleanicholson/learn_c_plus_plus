@@ -97,6 +97,7 @@ void getMove(const int player_loc[2], int (&new_player_loc)[2]) {
         switch (move) {
             case 'L':
             case 'l':
+                // Check if player is at an edge
                 if (player_loc[1] == 0) {
                     std::cout << "Invalid input, please try again" << std::endl;
                     break;
@@ -108,6 +109,7 @@ void getMove(const int player_loc[2], int (&new_player_loc)[2]) {
                 break;
             case 'R':
             case 'r':
+                // Check if player is at an edge
                 if (player_loc[1] == MAX_SIZE - 1) {
                     std::cout << "Invalid input, please try again" << std::endl;
                     break;
@@ -120,6 +122,7 @@ void getMove(const int player_loc[2], int (&new_player_loc)[2]) {
                 break;
             case 'U':
             case 'u':
+                // Check if player is at an edge
                 if (player_loc[0] == 0) {
                     std::cout << "Invalid input, please try again" << std::endl;
                     break;
@@ -132,6 +135,7 @@ void getMove(const int player_loc[2], int (&new_player_loc)[2]) {
                 break;
             case 'D':
             case 'd':
+                // Check if player is at an edge
                 if (player_loc[0] == MAX_SIZE - 1) {
                     std::cout << "Invalid input, please try again" << std::endl;
                     break;
@@ -154,9 +158,9 @@ bool checkLose(const int player_loc[2], char dungeon[][MAX_SIZE]) {
     // check if the player has stepped on a trap
     if (dungeon[player_loc[0]][player_loc[1]] == '#') {
         std::cout << "Oh No! You stepped into a Trap!!!" << std::endl;
+        // return true if the player has lost
         return true;
     }
-    // return true if the player has lost
     return false;
 }
 

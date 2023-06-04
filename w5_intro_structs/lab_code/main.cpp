@@ -1,7 +1,7 @@
 /*
-Lab No: 5a
+Lab No: 5b
 Name: Kyle Nicholson
-Date: 5/3/2023
+Date: 5/7/2023
 Revision: 1.0
 Description: This program will create a dynamic array of students, sort the array by last name,
 and search for a students by last name.

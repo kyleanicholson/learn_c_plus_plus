@@ -1,18 +1,54 @@
 
 #include "Player.hpp"
 #include "helper.hpp"
-
-Player::Player() : person(new Person()) {}
-
+// Default constructor - default constructor creates a default Person and sets className and action to “unknown”
+Player::Player() : person(new Person()),className("unknown"), action("unknown") {}
+// Overloaded constructor has parameters firstName, lastName, and age and creates Person using those values
 Player::Player(const std::string &firstName, const std::string &lastName, int age)
         : person(new Person(firstName, lastName, age)) {}
 
+// Copy constructor
+Player::Player(const Player &player)
+        : person(new Person(player.person->getFirstName(), player.person->getLastName(), player.person->getAge())),
+          className(player.className) {}
+// Destructor - deletes the person
 Player::~Player() {
     delete person;
+}
+// Assignment operator
+Player &Player::operator=(const Player &player) {
+    if (this != &player) {
+        delete person;
+        person = new Person(player.person->getFirstName(), player.person->getLastName(), player.person->getAge());
+        className = player.className;
+    }
+    return *this;
+}
+//Equality operator
+bool Player::operator==(const Player &player) const {
+    return person->getFirstName() == player.person->getFirstName() &&
+           person->getLastName() == player.person->getLastName() &&
+           person->getAge() == player.person->getAge() &&
+           className == player.className;
+}
+
+// Insertion operator
+ std::ostream &operator<<(std::ostream &os, const Player &player) {
+    os << player.person->getFirstName() << " " << player.person->getLastName() << " aged " << player.person->getAge()
+       << " playing " << player.className << " " << player.action;
+    return os;
 }
 
 std::string Player::getPlayerName() const {
     return person->getFirstName() + " " + person->getLastName();
+}
+
+std::string Player::getClassName() const {
+    return className;
+}
+
+std::string Player::getAction() const {
+    return action;
 }
 
 int Player::getPlayerAge() const {
@@ -30,38 +66,48 @@ std::string Ranger::getAction() const {
     return "shoots arrows";
 }
 
-Wizard::Wizard(const std::string &firstName, const std::string &lastName, int age)
-        : Player(firstName, lastName, age) {}
+Wizard::Wizard(const std::string& firstName, const std::string& lastName, int age)
+        : Player(firstName, lastName, age) {
+    className = "Wizard";
+    action = "casts fireballs";
+}
 
 std::string Wizard::getClassName() const {
-    return "Wizard";
+    return className;
 }
 
 std::string Wizard::getAction() const {
-    return "casts fireballs";
+    return action;
 }
 
-Rogue::Rogue(const std::string &firstName, const std::string &lastName, int age)
-        : Player(firstName, lastName, age) {}
+Rogue::Rogue(const std::string& firstName, const std::string& lastName, int age)
+        : Player(firstName, lastName, age) {
+    className = "Rogue";
+    action = "picks pockets";
+}
 
 std::string Rogue::getClassName() const {
-    return "Rogue";
+    return className;
 }
 
 std::string Rogue::getAction() const {
-    return "picks pockets";
+    return action;
 }
 
-Priest::Priest(const std::string &firstName, const std::string &lastName, int age)
-        : Player(firstName, lastName, age) {}
+Priest::Priest(const std::string& firstName, const std::string& lastName, int age)
+        : Player(firstName, lastName, age) {
+    className = "Priest";
+    action = "heals";
+}
 
 std::string Priest::getClassName() const {
-    return "Priest";
+    return className;
 }
 
 std::string Priest::getAction() const {
-    return "heals";
+    return action;
 }
+
 
 Player *createPlayer() {
 // used to dynamically create a new character class
